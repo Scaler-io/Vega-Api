@@ -17,6 +17,7 @@ namespace Vega_API
  
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddBusinessLayerServices();
             services.AddApplicationServices(Configuration);
             services.AddDatabaseServices(Configuration);
         }

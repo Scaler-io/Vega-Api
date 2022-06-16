@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -9,7 +9,7 @@ namespace Vega_API.DataAccess
 {
     public class DatabaseSeed
     {
-        public static async Task SeedAsync(VegaDbContext context, ILogger<DatabaseSeed> logger)
+        public static async Task SeedAsync(VegaDbContext context, ILogger logger)
         {
             if(!await context.Makes.AnyAsync())
             {
@@ -18,7 +18,7 @@ namespace Vega_API.DataAccess
             }
         } 
 
-        public static IEnumerable<VegaMake> GetPreconfiguredData(ILogger<DatabaseSeed> logger)
+        public static IEnumerable<VegaMake> GetPreconfiguredData(ILogger logger)
         {
             var make1Id = Guid.NewGuid();
             var make2Id = Guid.NewGuid();
@@ -63,7 +63,7 @@ namespace Vega_API.DataAccess
                 }
             };
 
-            logger.LogInformation("Seed data successfully prepared");
+            logger.Information("Seed data successfully prepared");
             return data;
         } 
     }
