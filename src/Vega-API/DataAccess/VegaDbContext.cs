@@ -10,6 +10,7 @@ namespace Vega_API.DataAccess
     public class VegaDbContext: DbContext
     {
         public DbSet<VegaMake> Makes { get; set; }
+        public DbSet<VegaFeature> Features { get; set;}
 
         public VegaDbContext(DbContextOptions<VegaDbContext> options)
             :base(options)

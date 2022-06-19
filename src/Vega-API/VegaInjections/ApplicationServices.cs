@@ -53,6 +53,12 @@ namespace Vega_API.VegaInjections
                 options.InvalidModelStateResponseFactory = HandleFrameorkValidationFailure();
             });
 
+            services.AddCors(options => {
+               options.AddPolicy("VegaCorsPolicy", policy => {
+                policy.WithOrigins("http://localhost:8080").AllowAnyHeader().AllowAnyMethod();
+               });
+            });
+
             services.AddSingleton(x => logger);
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -103,6 +109,8 @@ namespace Vega_API.VegaInjections
             app.UseMiddleware<RequestExceptionMiddleware>();
             app.UseMiddleware<RequestLoggingMiddleware>();
 
+            app.UseCors("VegaCorsPolicy");
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

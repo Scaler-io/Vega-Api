@@ -10,6 +10,7 @@ namespace Vega_API.Mapper
         {
             CreateMap<VegaMake, VegaMakeResponse>().ReverseMap();
             CreateMap<VegaModel, VegaModelResponse>().ReverseMap();
+            CreateMap<VegaFeature, VegaFeatureResponse>().ReverseMap();
         }
     }
 }

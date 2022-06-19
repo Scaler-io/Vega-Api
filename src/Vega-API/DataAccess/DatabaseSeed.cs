@@ -16,6 +16,10 @@ namespace Vega_API.DataAccess
                 await context.Makes.AddRangeAsync(GetPreconfiguredData(logger));
                 await context.SaveChangesAsync();
             }
+            if(!await context.Features.AnyAsync()){
+                await context.Features.AddRangeAsync(GetPreconfiguredFeatureData(logger));
+                await context.SaveChangesAsync();   
+            }
         } 
 
         public static IEnumerable<VegaMake> GetPreconfiguredData(ILogger logger)
@@ -66,5 +70,30 @@ namespace Vega_API.DataAccess
             logger.Information("Seed data successfully prepared");
             return data;
         } 
+
+        public static IEnumerable<VegaFeature> GetPreconfiguredFeatureData(ILogger logger){
+            var data = new List<VegaFeature>{
+                new VegaFeature{
+                    Id = Guid.NewGuid(),
+                    Name = "Feature1",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                },
+                new VegaFeature{
+                    Id = Guid.NewGuid(),
+                    Name = "Feature2",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                },
+                new VegaFeature{
+                    Id = Guid.NewGuid(),
+                    Name = "Feature3",
+                    CreatedAt = DateTime.Now,
+                    UpdatedAt = DateTime.Now,
+                }
+            };
+            logger.Information("Seed data successfully prepared");
+            return data;
+        }
     }
 }
